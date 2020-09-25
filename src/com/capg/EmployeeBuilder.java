@@ -7,7 +7,7 @@ public class EmployeeBuilder {
 	public static final int NUM_OF_WORKING_DAYS = 20;
 	public static final int MAX_HRS_IN_MONTH = 100;
 	
-	public static void main(String[] args) {
+	public static int computeWage() {
 		int empHrs = 0;
 		int totalWorkingDays = 0;
 		int totalEmpHrs = 0;
@@ -29,6 +29,6 @@ public class EmployeeBuilder {
 			System.out.println("DAY#: " + totalWorkingDays + "Emp Hr: "+ empHrs);
 		}
 		int totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
-		System.out.println("Total Emp Wage: " + totalEmpWage);
+		return totalEmpWage;
 	}
 }
