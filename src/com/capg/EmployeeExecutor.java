@@ -6,5 +6,6 @@ public class EmployeeExecutor {
 		 empWageBuilder.addCompanyEmpWage("Reliance",  20,  2,  10);
 		 empWageBuilder.addCompanyEmpWage("BigBazar",  10,  4,  20);
 		 empWageBuilder.computeEmpWage();
+		 System.out.println("Total Wage for BigBazar: "+ empWageBuilder.getTotalWage( "BigBazar"));
 	}
 }

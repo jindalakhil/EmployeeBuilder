@@ -1,29 +1,35 @@
 package com.capg;
+import java.util.*;
 
 public class EmployeeBuilder implements ComputeEmpInterface {
 	public static final int IS_PART_TIME =1;
 	public static final int IS_FULL_TIME =2;
-	public int numOfCompany = 0;
-	private CompanyEmpWage[] companyEmpWageArray;
+	
+	
+	private ArrayList<CompanyEmpWage> companyEmpWageList;
+	private Map<String, CompanyEmpWage> companyToEmpWageMap;
 	
     public EmployeeBuilder() {
-    	companyEmpWageArray = new CompanyEmpWage[5];
+    	companyEmpWageList = new ArrayList<>();
+    	companyToEmpWageMap = new HashMap<>();
     }
-    
+	
     @Override
     public void addCompanyEmpWage(String company, int empRatePerHour,int numOfWorkingDays, int maxHoursPerMonth ) {
-    	companyEmpWageArray[numOfCompany] = new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
-        numOfCompany++;
+		CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
+		companyEmpWageList.add(companyEmpWage);
+		companyToEmpWageMap.put(company, companyEmpWage);
+
     }
-    
     @Override
 	public void computeEmpWage() {
-		for(int i =0; i < numOfCompany; i++) {
-			companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
-		System.out.println(companyEmpWageArray[i]);
-		}
+    	for(int i = 0; i < companyEmpWageList.size(); i++){
+		CompanyEmpWage companyEmpWage = companyEmpWageList.get(i);
+		companyEmpWage.setTotalEmpWage(this.computeEmpWage(companyEmpWage));
+		System.out.println(companyEmpWage);
+      }
 	}
-	public int computeEmpWage(CompanyEmpWage companyEmpWage) {
+	private int computeEmpWage(CompanyEmpWage companyEmpWage) {
 		int empHours = 0, totalEmpHours = 0, totalWorkingDays = 0;
 
 
@@ -47,11 +53,11 @@ public class EmployeeBuilder implements ComputeEmpInterface {
 			System.out.println("Day: " + totalWorkingDays + " Emp Hr:  " + empHours);
 		}
        return totalEmpHours * companyEmpWage.empRatePerHour;
-       
-		}
+
+	}
+	
 	@Override
 	public int getTotalWage(String company) {
-		return 0;
-		
+		return companyToEmpWageMap.get(company).totalEmpWage;
 	}
 }
