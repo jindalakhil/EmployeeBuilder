@@ -2,8 +2,11 @@ package com.capg;
 
 public class EmployeeExecutor {
 	public static void main(String args[]) {
-		EmployeeBuilder obj = new EmployeeBuilder();
-		System.out.println("Total Emp Wage: "+ obj.computeWage("Reliance", 15, 25 , 100));
-		System.out.println("Total Emp Wage: "+ obj.computeWage("BigBazar", 20, 27 , 90));	
+		EmployeeBuilder reliance = new EmployeeBuilder("Reliance", 15, 25, 100);
+		EmployeeBuilder bigBazar = new EmployeeBuilder("BigBazar", 20, 27, 90);
+		reliance.computeEmpWage();
+	    System.out.println(reliance);
+	    bigBazar.computeEmpWage();
+	    System.out.println(bigBazar);
 	}
 }
